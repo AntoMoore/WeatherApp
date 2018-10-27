@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Solstice"
+             x:Class="Solstice.MainPage">
+
+    <StackLayout HorizontalOptions="Center"
+                 VerticalOptions="Fill">
+        <!-- Current weather grid (Top)-->
+        <Grid Padding="10,50,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="100" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <!-- Placeholder Text -->
+            <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
+            <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" />
+            <Label Text="Top Right" Grid.Row="0" Grid.Column="2" />
+            <Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
+            <Label Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
+            <Label Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
+        </Grid>
+
+    </StackLayout>
+
+</ContentPage>
