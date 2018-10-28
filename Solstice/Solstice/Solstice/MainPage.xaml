@@ -5,70 +5,74 @@
              x:Class="Solstice.MainPage">
 
     <StackLayout>
-        <!-- Current weather grid 2x3 (Top)-->
-        <StackLayout HorizontalOptions="CenterAndExpand"
+
+        <Grid >
+            <!-- Background Image -->
+            <Image x:Name="imageBackground" Aspect="AspectFill" />
+            <!-- Rest of the layout for the page. -->
+            <!-- Current weather grid 2x3 (Top)-->
+            <StackLayout HorizontalOptions="CenterAndExpand"
                  VerticalOptions="Start">
-            <Grid Padding="100,50,10,100">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100" />
-                    <RowDefinition Height="100" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                    <ColumnDefinition Width="200" />
-                </Grid.ColumnDefinitions>
-                <!-- Placeholder Text -->
-                <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" />
-                <Label Text="Top Right" Grid.Row="0" Grid.Column="2" />
-                
-                <Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
-                <Label Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
-                <Label Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
-            </Grid>
-        </StackLayout>
+                <Grid Padding="100,50,10,100">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="200" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Placeholder Text -->
+                    <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" />
+                    <Label Text="Top Right" Grid.Row="0" Grid.Column="2" />
 
-        <!-- 5 day weather grid 3x 5 (Bottom)-->
-        <StackLayout HorizontalOptions="Center"
+                    <Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
+                    <Label Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
+                </Grid>
+            </StackLayout>
+
+            <!-- 5 day weather grid 3 x 5 (Bottom)-->
+            <StackLayout HorizontalOptions="Center"
                  VerticalOptions="EndAndExpand">
-            <Grid Padding="10,10,10,50">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="75" />
-                    <RowDefinition Height="75" />
-                    <RowDefinition Height="75" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
-                <!-- Placeholder Text -->
-                <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                <Label Text="Top Middle1" Grid.Row="0" Grid.Column="1" />
-                <Label Text="Top Middle2" Grid.Row="0" Grid.Column="2" />
-                <Label Text="Top Middle3" Grid.Row="0" Grid.Column="3" />
-                <Label Text="Top Right" Grid.Row="0" Grid.Column="4" />
+                <Grid Padding="10,10,10,50">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                        <RowDefinition Height="75" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="100" />
+                    </Grid.ColumnDefinitions>
+                    <!-- Placeholder Text -->
+                    <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
+                    <Label Text="Top Middle1" Grid.Row="0" Grid.Column="1" />
+                    <Label Text="Top Middle2" Grid.Row="0" Grid.Column="2" />
+                    <Label Text="Top Middle3" Grid.Row="0" Grid.Column="3" />
+                    <Label Text="Top Right" Grid.Row="0" Grid.Column="4" />
 
-                <Label Text="Mid Left" Grid.Row="1" Grid.Column="0" />
-                <Label Text="Mid Middle1" Grid.Row="1" Grid.Column="1" />
-                <Label Text="Mid Middle2" Grid.Row="1" Grid.Column="2" />
-                <Label Text="Mid Middle3" Grid.Row="1" Grid.Column="3" />
-                <Label Text="Mid Right" Grid.Row="1" Grid.Column="4" />
+                    <Label Text="Mid Left" Grid.Row="1" Grid.Column="0" />
+                    <Label Text="Mid Middle1" Grid.Row="1" Grid.Column="1" />
+                    <Label Text="Mid Middle2" Grid.Row="1" Grid.Column="2" />
+                    <Label Text="Mid Middle3" Grid.Row="1" Grid.Column="3" />
+                    <Label Text="Mid Right" Grid.Row="1" Grid.Column="4" />
 
-                <Label Text="Bot Left" Grid.Row="2" Grid.Column="0" />
-                <Label Text="Bot Middle1" Grid.Row="2" Grid.Column="1" />
-                <Label Text="Bot Middle2" Grid.Row="2" Grid.Column="2" />
-                <Label Text="Bot Middle3" Grid.Row="2" Grid.Column="3" />
-                <Label Text="Bot Right" Grid.Row="2" Grid.Column="4" />
+                    <Label Text="Bot Left" Grid.Row="2" Grid.Column="0" />
+                    <Label Text="Bot Middle1" Grid.Row="2" Grid.Column="1" />
+                    <Label Text="Bot Middle2" Grid.Row="2" Grid.Column="2" />
+                    <Label Text="Bot Middle3" Grid.Row="2" Grid.Column="3" />
+                    <Label Text="Bot Right" Grid.Row="2" Grid.Column="4" />
 
-            </Grid>
-        </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Grid >
 
     </StackLayout>
-
-
 
 </ContentPage>

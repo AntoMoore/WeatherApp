@@ -12,8 +12,16 @@ namespace Solstice
         public MainPage()
         {
             InitializeComponent();
-        
+            SetupImagesOnPage();
         }
-        
+
+        private void SetupImagesOnPage()
+        {
+            // get the assembly and file location
+            var assembly = typeof(MainPage);
+            string strFilename = "Solstice.Assets.Images.mysunflower.png";
+            //output background image
+            imageBackground.Source = ImageSource.FromResource(strFilename, assembly);
+        }
     }
 }
