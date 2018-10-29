@@ -11,9 +11,10 @@
             <Image x:Name="imageBackground" Aspect="AspectFill" />
             <!-- Rest of the layout for the page. -->
             <!-- Current weather grid 2x3 (Top)-->
-            <StackLayout HorizontalOptions="CenterAndExpand"
-                 VerticalOptions="Start">
-                <Grid Padding="100,50,10,100">
+            <StackLayout HorizontalOptions="CenterAndExpand"                        
+                         VerticalOptions="Start"
+                         Padding="100,50,10,100">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
@@ -34,10 +35,28 @@
                 </Grid>
             </StackLayout>
 
+            <!-- Placeholder GPS OUTPUTS -->
+            <StackLayout HorizontalOptions="Center" 
+                        VerticalOptions="CenterAndExpand"
+                        Padding="10,10,10,10">
+
+                <Label Text="Latitude"
+                    x:Name="lblLatitude"                   
+                    FontSize="Large"                  
+                    TextColor="Red" />
+
+                <Label Text="Longitude"
+                    x:Name="lblLongitude"
+                    FontSize="Large" 
+                    TextColor="Red" />
+
+            </StackLayout>
+
             <!-- 5 day weather grid 3 x 5 (Bottom)-->
             <StackLayout HorizontalOptions="Center"
-                 VerticalOptions="EndAndExpand">
-                <Grid Padding="10,10,10,50">
+                    VerticalOptions="End"
+                    Padding="10,10,10,50">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="75" />
                         <RowDefinition Height="75" />
