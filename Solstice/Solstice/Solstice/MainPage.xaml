@@ -8,7 +8,7 @@
 
         <Grid >
             <!-- Background Image -->
-            <Image x:Name="imageBackground" Aspect="AspectFill" />
+            <Image x:Name="imageBackground" Aspect="Fill" />
             <!-- Rest of the layout for the page. -->
             <!-- Current weather grid 2x3 (Top)-->
             <StackLayout HorizontalOptions="CenterAndExpand"                        
