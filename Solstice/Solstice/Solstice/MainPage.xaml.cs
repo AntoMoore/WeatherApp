@@ -16,7 +16,7 @@ namespace Solstice
         {
             InitializeComponent();
             SetupImagesOnPage();
-            GetGPS();
+            GetWeather();
         }
 
         //images method
@@ -30,7 +30,7 @@ namespace Solstice
         }
 
         //gps method
-        public async void GetGPS()
+        public async void GetWeather()
         {
             //variables
             double lat;
