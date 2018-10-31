@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solstice.Android", "Solstic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solstice.UWP", "Solstice\Solstice.UWP\Solstice.UWP.csproj", "{301033A3-3F95-4671-A78D-F585A3B46D91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Solstice", "Solstice\Solstice\Solstice.csproj", "{7BDB9E00-1596-40BF-9BB8-DE8CCEFE0B4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Solstice", "Solstice\Solstice\Solstice.csproj", "{7BDB9E00-1596-40BF-9BB8-DE8CCEFE0B4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
