@@ -39,14 +39,9 @@
             <StackLayout HorizontalOptions="Center" 
                         VerticalOptions="CenterAndExpand"
                         Padding="10,10,10,10">
-
-                <Label Text="Latitude"
-                    x:Name="lblLatitude"                   
-                    FontSize="Large"                  
-                    TextColor="Red" />
-
-                <Label Text="Longitude"
-                    x:Name="lblLongitude"
+               
+                <Label Text="Return"
+                    x:Name="myOutput"
                     FontSize="Large" 
                     TextColor="Red" />
 
