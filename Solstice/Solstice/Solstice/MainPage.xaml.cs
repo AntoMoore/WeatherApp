@@ -5,8 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Net;
-using System.IO;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Solstice
 {
@@ -32,13 +32,13 @@ namespace Solstice
         //gps method
         public async void GetWeather()
         {
-            //variables
+            //local variables
             double lat;
             double lon;
-
-            //request user permission for geolocation
+           
             try
             {
+                //request user permission for geolocation
                 var location = await Geolocation.GetLastKnownLocationAsync();
 
                 if (location != null)
@@ -47,40 +47,30 @@ namespace Solstice
                     lat = location.Latitude;
                     lon = location.Longitude;
 
-                    //concat the weather api string with the 'lat' and 'long' variables
-                    var request = HttpWebRequest.Create(string.Format(@"http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon));
-                    request.ContentType = "application/json";
-                    request.Method = "GET";
-
                     //JSON call to open weather api
-                    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                    {
-                        if (response.StatusCode != HttpStatusCode.OK)
-                        {
-                            //failed to get response
-                            myOutput.Text = "Error fetching data. Server returned status code: {0}";
-                        }
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                        {
-                            //read in response
-                            var content = reader.ReadToEnd();
-                            if (string.IsNullOrWhiteSpace(content))
-                            {
-                                //content empty
-                                myOutput.Text = "Response: contained empty body...";
-                            }
-                            else
-                            {
-                                //sucessful call
-                                var answer = string.Format("Response for: {0} and {1}", Math.Round(lat,2), Math.Round(lon,2));
-                                myOutput.Text = answer;
+                    HttpClient client = new HttpClient();
+                    var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon);
+                    var response = await client.GetStringAsync(url);
+                    var localWeather = JObject.Parse(response);
+                    
+                    //variables created from the api data
+                    var weatherType = localWeather["weather"][0]["description"];
+                    var windSpeed = localWeather["wind"]["speed"];
+                    var city = localWeather["name"];
+                    var kTemp = localWeather["main"]["temp"];
 
-                                
+                    //local variables
+                    float cTemp = 0;
+                    double speedKph;
 
-                            }
+                    //tempreture from kelvin to celsius
+                    cTemp = ((float)kTemp - 273);                  
+                    //convert m/s into km/h
+                    speedKph = (float)windSpeed * 3.6;
 
-                        }//streamReader
-                    }//using
+                    //Test outputs
+                    myOutput.Text = "Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C";
+
                 }//if
             }//try
             catch (FeatureNotSupportedException fnsEx)
@@ -97,5 +87,5 @@ namespace Solstice
             }
           
         }//getGPS
-    }
-}
+    }//mainpage
+}//namespace
