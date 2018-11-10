@@ -65,6 +65,8 @@ namespace Solstice
                     var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon);
                     var response = await client.GetStringAsync(url);
 
+                    //JSON call for 5 day weather
+
                     //test if response is not empty
                     if(response != null)
                     {
