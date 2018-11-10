@@ -1,12 +1,12 @@
-﻿using Xamarin.Essentials;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using System.Net;
-using System.IO;
+using Xamarin.Essentials;
+using System.Net.Http;
+using Newtonsoft.Json.Linq;
 
 namespace Solstice
 {
@@ -14,9 +14,11 @@ namespace Solstice
     {
         public MainPage()
         {
+            //constructors
             InitializeComponent();
             SetupImagesOnPage();
-            GetGPS();
+            GetWeather();
+            GetTime();
         }
 
         //images method
@@ -29,73 +31,99 @@ namespace Solstice
             imageBackground.Source = ImageSource.FromResource(strFilename, assembly);
         }
 
-        //gps method
-        public async void GetGPS()
+        //get time and date
+        public void GetTime()
         {
-            //variables
+            var time = DateTime.Now;
+            btmLeft.Text = time.ToString();
+        }
+
+        //gps method
+        public async void GetWeather()
+        {
+            //local variables
             double lat;
             double lon;
-
-            //request user permission for geolocation
+         
             try
             {
+                //get geolocation
                 var location = await Geolocation.GetLastKnownLocationAsync();
 
+                //test if location is not empty
                 if (location != null)
                 {
                     //variables for gps
                     lat = location.Latitude;
                     lon = location.Longitude;
 
-                    //concat the weather api string with the 'lat' and 'long' variables
-                    var request = HttpWebRequest.Create(string.Format(@"http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon));
-                    request.ContentType = "application/json";
-                    request.Method = "GET";
+                    //Debug
+                    //myOutput.Text = "DEBUG: "+ lat.ToString() + " " + lon.ToString();
 
                     //JSON call to open weather api
-                    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                    HttpClient client = new HttpClient();
+                    var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon);
+                    var response = await client.GetStringAsync(url);
+
+                    //test if response is not empty
+                    if(response != null)
                     {
-                        if (response.StatusCode != HttpStatusCode.OK)
-                        {
-                            //failed to get response
-                            myOutput.Text = "Error fetching data. Server returned status code: {0}";
-                        }
-                        using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                        {
-                            //read in response
-                            var content = reader.ReadToEnd();
-                            if (string.IsNullOrWhiteSpace(content))
-                            {
-                                //content empty
-                                myOutput.Text = "Response: contained empty body...";
-                            }
-                            else
-                            {
-                                //sucessful call
-                                var answer = string.Format("Response for: {0} and {1}", Math.Round(lat,2), Math.Round(lon,2));
-                                myOutput.Text = answer;
+                        var localWeather = JObject.Parse(response);
 
-                                
+                        //variables created from the api data
+                        var weatherType = localWeather["weather"][0]["description"];
+                        var windSpeed = localWeather["wind"]["speed"];
+                        var city = localWeather["name"];
+                        var kTemp = localWeather["main"]["temp"];
 
-                            }
+                        //local variables
+                        float cTemp = 0;
+                        double speedKph;
 
-                        }//streamReader
-                    }//using
+                        //tempreture from kelvin to celsius
+                        cTemp = ((float)kTemp - 273);
+                        //convert m/s into km/h
+                        speedKph = (float)windSpeed * 3.6;
+
+                        //outputs
+                        tpLeft.Text = city.ToString();
+                        tpMid.Text = Math.Round(cTemp, 2).ToString() + "°C";
+                        tpRight.Text = "Image Here";
+                        //btmLeft is the Time/Date
+                        btmMid.Text = Math.Round(speedKph, 2).ToString() + " Km/h";
+                        btmRight.Text = weatherType.ToString();
+
+                        //DEBUG
+                        //myOutput.Text = "DEBUG - Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C";                        
+                    }
+                    else
+                    {
+                        //JSON empty
+                        myOutput.Text = "ERROR - JSON NULL";
+                    }
                 }//if
+                else
+                {
+                    //location empty
+                    myOutput.Text = "ERROR - GPS NULL";
+                }
             }//try
             catch (FeatureNotSupportedException fnsEx)
             {
                 // Handle not supported on device exception
+                myOutput.Text = "ERROR - Not Supported on Device: " + fnsEx.ToString();
             }
             catch (PermissionException pEx)
             {
                 // Handle permission exception
+                myOutput.Text = "ERROR - Permission Exception: " + pEx.ToString();
             }
             catch (Exception ex)
             {
                 // Unable to get location
+                myOutput.Text = "ERROR - Unable to Get Location: " + ex.ToString();
             }
           
         }//getGPS
-    }
-}
+    }//mainpage
+}//namespace

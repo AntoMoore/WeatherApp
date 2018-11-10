@@ -25,13 +25,13 @@
                         <ColumnDefinition Width="200" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
-                    <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                    <Label Text="Top Middle" Grid.Row="0" Grid.Column="1" />
-                    <Label Text="Top Right" Grid.Row="0" Grid.Column="2" />
+                    <Label x:Name="tpLeft" Text="Top Left" Grid.Row="0" Grid.Column="0" />
+                    <Label x:Name="tpMid" Text="Top Middle" Grid.Row="0" Grid.Column="1" />
+                    <Label x:Name="tpRight" Text="Top Right" Grid.Row="0" Grid.Column="2" />
 
-                    <Label Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
-                    <Label Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
-                    <Label Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
+                    <Label x:Name="btmLeft" Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
+                    <Label x:Name="btmMid" Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
+                    <Label x:Name="btmRight" Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
                 </Grid>
             </StackLayout>
 
@@ -40,7 +40,7 @@
                         VerticalOptions="CenterAndExpand"
                         Padding="10,10,10,10">
                
-                <Label Text="Return"
+                <Label Text="DEBUG:"
                     x:Name="myOutput"
                     FontSize="Large" 
                     TextColor="Red" />
