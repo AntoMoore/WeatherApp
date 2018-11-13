@@ -65,23 +65,23 @@
                         <ColumnDefinition Width="100" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
-                    <Label Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                    <Label Text="Top Middle1" Grid.Row="0" Grid.Column="1" />
-                    <Label Text="Top Middle2" Grid.Row="0" Grid.Column="2" />
-                    <Label Text="Top Middle3" Grid.Row="0" Grid.Column="3" />
-                    <Label Text="Top Right" Grid.Row="0" Grid.Column="4" />
+                    <Label x:Name="top_1" Text="Top Left" Grid.Row="0" Grid.Column="0" />
+                    <Label x:Name="top_2" Text="Top Middle1" Grid.Row="0" Grid.Column="1" />
+                    <Label x:Name="top_3" Text="Top Middle2" Grid.Row="0" Grid.Column="2" />
+                    <Label x:Name="top_4" Text="Top Middle3" Grid.Row="0" Grid.Column="3" />
+                    <Label x:Name="top_5" Text="Top Right" Grid.Row="0" Grid.Column="4" />
 
-                    <Label Text="Mid Left" Grid.Row="1" Grid.Column="0" />
-                    <Label Text="Mid Middle1" Grid.Row="1" Grid.Column="1" />
-                    <Label Text="Mid Middle2" Grid.Row="1" Grid.Column="2" />
-                    <Label Text="Mid Middle3" Grid.Row="1" Grid.Column="3" />
-                    <Label Text="Mid Right" Grid.Row="1" Grid.Column="4" />
+                    <Label x:Name="mid_1" Text="Mid Left" Grid.Row="1" Grid.Column="0" />
+                    <Label x:Name="mid_2" Text="Mid Middle1" Grid.Row="1" Grid.Column="1" />
+                    <Label x:Name="mid_3" Text="Mid Middle2" Grid.Row="1" Grid.Column="2" />
+                    <Label x:Name="mid_4" Text="Mid Middle3" Grid.Row="1" Grid.Column="3" />
+                    <Label x:Name="mid_5" Text="Mid Right" Grid.Row="1" Grid.Column="4" />
 
-                    <Label Text="Bot Left" Grid.Row="2" Grid.Column="0" />
-                    <Label Text="Bot Middle1" Grid.Row="2" Grid.Column="1" />
-                    <Label Text="Bot Middle2" Grid.Row="2" Grid.Column="2" />
-                    <Label Text="Bot Middle3" Grid.Row="2" Grid.Column="3" />
-                    <Label Text="Bot Right" Grid.Row="2" Grid.Column="4" />
+                    <Label x:Name="btm_1" Text="Bot Left" Grid.Row="2" Grid.Column="0" />
+                    <Label x:Name="btm_2" Text="Bot Middle1" Grid.Row="2" Grid.Column="1" />
+                    <Label x:Name="btm_3" Text="Bot Middle2" Grid.Row="2" Grid.Column="2" />
+                    <Label x:Name="btm_4" Text="Bot Middle3" Grid.Row="2" Grid.Column="3" />
+                    <Label x:Name="btm_5" Text="Bot Right" Grid.Row="2" Grid.Column="4" />
 
                 </Grid>
             </StackLayout>
