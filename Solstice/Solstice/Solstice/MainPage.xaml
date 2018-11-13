@@ -10,7 +10,7 @@
             <!-- Background Image -->
             <Image x:Name="imageBackground" Aspect="Fill" />
             <!-- Rest of the layout for the page. -->
-            <!-- Current weather grid 2x3 (Top)-->
+            <!-- Current weather   grid 2x3 (Top)-->
             <StackLayout HorizontalOptions="CenterAndExpand"                        
                          VerticalOptions="Start"
                          Padding="100,50,10,100">
