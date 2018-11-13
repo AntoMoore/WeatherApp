@@ -12,16 +12,20 @@ namespace Solstice
 {
     public partial class MainPage : ContentPage
     {
+        //Global variables
+        double lat;
+        double lon;
+     
         public MainPage()
         {
             //constructors
             InitializeComponent();
             SetupImagesOnPage();
-            GetWeather();
             GetTime();
+            GetGps();           
         }
 
-        //images method
+        //images embedded reasource
         private void SetupImagesOnPage()
         {
             // get the assembly and file location
@@ -39,18 +43,14 @@ namespace Solstice
         }
 
         //gps method
-        public async void GetWeather()
+        public async void GetGps()
         {
-            //local variables
-            double lat;
-            double lon;
-         
             try
             {
                 //get geolocation
                 var location = await Geolocation.GetLastKnownLocationAsync();
 
-                //test if location is not empty
+                //test if location is found
                 if (location != null)
                 {
                     //variables for gps
@@ -59,16 +59,16 @@ namespace Solstice
 
                     //Debug
                     //myOutput.Text = "DEBUG: "+ lat.ToString() + " " + lon.ToString();
+                  
+                    //JSON call to open weather api (Current Weather)
+                    HttpClient current = new HttpClient();
+                    var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
+                    var responseCurrent = await current.GetStringAsync(url);              
 
-                    //JSON call to open weather api
-                    HttpClient client = new HttpClient();
-                    var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=3ce66444abe0bb9e6dec0fbfecbd27be", lat, lon);
-                    var response = await client.GetStringAsync(url);
-
-                    //test if response is not empty
-                    if(response != null)
+                    //test if responseCurrent is not empty
+                    if(responseCurrent != null)
                     {
-                        var localWeather = JObject.Parse(response);
+                        var localWeather = JObject.Parse(responseCurrent);
 
                         //variables created from the api data
                         var weatherType = localWeather["weather"][0]["description"];
@@ -85,7 +85,7 @@ namespace Solstice
                         //convert m/s into km/h
                         speedKph = (float)windSpeed * 3.6;
 
-                        //outputs
+                        //outputs Top Grid
                         tpLeft.Text = city.ToString();
                         tpMid.Text = Math.Round(cTemp, 2).ToString() + "°C";
                         tpRight.Text = "Image Here";
@@ -95,16 +95,50 @@ namespace Solstice
 
                         //DEBUG
                         //myOutput.Text = "DEBUG - Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C";                        
+                    }// if responseCurrent
+                    else
+                    {
+                        //JSON empty
+                        myOutput.Text = "ERROR - JSON CURRENT NULL";
+                    }
+
+                    //JSON call to open weather api (Weather Forecast)
+                    HttpClient forecast = new HttpClient();
+                    var url2 = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
+                    var responseForecast = await forecast.GetStringAsync(url2);
+
+                    //test if responseForecast is not empty
+                    if (responseForecast != null)
+                    {
+                        var localForecast = JObject.Parse(responseForecast);
+
+                        //make loop for 5 day forecast
+                        for(int i = 0; i < 5; i++)
+                        {
+                            //variables created from the api data
+                            var theDescription = localForecast["list"][i]["weather"][0]["description"];
+                            var highTemp = localForecast["list"][i]["main"]["temp_max"];
+                            var lowTemp = localForecast["list"][i]["main"]["temp_min"];
+
+                            top_1.Text = theDescription.ToString();
+                            mid_1.Text = highTemp.ToString();
+                            btm_1.Text = lowTemp.ToString();
+                            
+                            //top_(i + 1).Text = theDescription.ToString();
+                            
+                        }
+                        
                     }
                     else
                     {
                         //JSON empty
-                        myOutput.Text = "ERROR - JSON NULL";
+                        myOutput.Text = "ERROR - JSON CURRENT NULL";
                     }
-                }//if
+
+                }//if location is found
                 else
                 {
-                    //location empty
+                    // GPS location not found
                     myOutput.Text = "ERROR - GPS NULL";
                 }
             }//try
