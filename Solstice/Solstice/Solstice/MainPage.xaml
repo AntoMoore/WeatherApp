@@ -4,25 +4,25 @@
              xmlns:local="clr-namespace:Solstice"
              x:Class="Solstice.MainPage">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="Blue">
 
         <Grid >
             <!-- Background Image -->
-            <Image x:Name="imageBackground" Aspect="Fill" />
+            <Image x:Name="imageBackground" Aspect="AspectFill" />
             <!-- Rest of the layout for the page. -->
-            <!-- Current weather   grid 2x3 (Top)-->
+            <!-- Current weather grid 2x3 (Top)-->
             <StackLayout HorizontalOptions="CenterAndExpand"                        
                          VerticalOptions="Start"
-                         Padding="100,50,10,100">
+                         Padding="10,50,10,50">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
                     <Label x:Name="tpLeft" Text="Top Left" Grid.Row="0" Grid.Column="0" />
@@ -37,8 +37,8 @@
 
             <!-- Placeholder GPS OUTPUTS -->
             <StackLayout HorizontalOptions="Center" 
-                        VerticalOptions="CenterAndExpand"
-                        Padding="10,10,10,10">
+                        VerticalOptions="Center"
+                        Padding="10,10,10,50">
                
                 <Label Text="DEBUG:"
                     x:Name="myOutput"
@@ -48,7 +48,7 @@
             </StackLayout>
 
             <!-- 5 day weather grid 3 x 5 (Bottom)-->
-            <StackLayout HorizontalOptions="Center"
+            <StackLayout HorizontalOptions="CenterAndExpand"
                     VerticalOptions="End"
                     Padding="10,10,10,50">
                 <Grid>
@@ -58,11 +58,11 @@
                         <RowDefinition Height="75" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
                     <Label x:Name="top_1" Text="Top Left" Grid.Row="0" Grid.Column="0" />

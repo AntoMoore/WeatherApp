@@ -20,35 +20,28 @@ namespace Solstice
         {
             //constructors
             InitializeComponent();
-            SetupImagesOnPage();
-            GetTime();
+            SetupBackground();
             GetGps();           
         }
 
         //images embedded reasource
-        private void SetupImagesOnPage()
+        private void SetupBackground()
         {
             // get the assembly and file location
             var assembly = typeof(MainPage);
-            string strFilename = "Solstice.Assets.Images.mysunflower.png";
+            string strFilename = "Solstice.Assets.Images.backgroundimg.png";
             //output background image
             imageBackground.Source = ImageSource.FromResource(strFilename, assembly);
         }
-
-        //get time and date
-        public void GetTime()
-        {
-            var time = DateTime.Now;
-            btmLeft.Text = time.ToString();
-        }
-
+        
         //gps method
         public async void GetGps()
         {
             try
             {
                 //get geolocation
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                var request = new GeolocationRequest(GeolocationAccuracy.Medium);
+                var location = await Geolocation.GetLocationAsync(request);
 
                 //test if location is found
                 if (location != null)
@@ -70,11 +63,12 @@ namespace Solstice
                     {
                         var localWeather = JObject.Parse(responseCurrent);
 
-                        //variables created from the api data
-                        var weatherType = localWeather["weather"][0]["description"];
-                        var windSpeed = localWeather["wind"]["speed"];
+                        //variables created from the api data                       
                         var city = localWeather["name"];
                         var kTemp = localWeather["main"]["temp"];
+                        var weatherType = localWeather["weather"][0]["description"];
+                        var windSpeed = localWeather["wind"]["speed"];
+                        var windDirection = localWeather["wind"]["deg"];
 
                         //local variables
                         float cTemp = 0;
@@ -89,8 +83,8 @@ namespace Solstice
                         tpLeft.Text = city.ToString();
                         tpMid.Text = Math.Round(cTemp, 2).ToString() + "°C";
                         tpRight.Text = "Image Here";
-                        //btmLeft is the Time/Date
-                        btmMid.Text = Math.Round(speedKph, 2).ToString() + " Km/h";
+                        btmLeft.Text = Math.Round(speedKph, 2).ToString() + " Km/h";
+                        btmMid.Text = windDirection.ToString() + "°Deg";
                         btmRight.Text = weatherType.ToString();
 
                         //DEBUG
@@ -111,6 +105,8 @@ namespace Solstice
                     if (responseForecast != null)
                     {
                         var localForecast = JObject.Parse(responseForecast);
+                        //make label object
+                        Label label;
 
                         //make loop for 5 day forecast
                         for(int i = 0; i < 5; i++)
@@ -120,15 +116,26 @@ namespace Solstice
                             var highTemp = localForecast["list"][i]["main"]["temp_max"];
                             var lowTemp = localForecast["list"][i]["main"]["temp_min"];
 
-                            top_1.Text = theDescription.ToString();
-                            mid_1.Text = highTemp.ToString();
-                            btm_1.Text = lowTemp.ToString();
-                            
-                            //top_(i + 1).Text = theDescription.ToString();
-                            
-                        }
-                        
-                    }
+                            //top row
+                            if( (label = (Label)FindByName("top_" + (i + 1).ToString())) != null )
+                            {
+                                label.Text = theDescription.ToString();                               
+                            }
+
+                            //middle row
+                            if ((label = (Label)FindByName("mid_" + (i + 1).ToString())) != null)
+                            {
+                                label.Text = highTemp.ToString();
+                            }
+
+                            //bottom row
+                            if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
+                            {                               
+                                label.Text = lowTemp.ToString();
+                            }
+
+                        }//for                       
+                    }//if
                     else
                     {
                         //JSON empty
