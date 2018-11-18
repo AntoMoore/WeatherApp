@@ -8,14 +8,25 @@ using Xamarin.Essentials;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
 
+
 namespace Solstice
 {
     public partial class MainPage : ContentPage
     {
         //Global variables
-        double lat;
-        double lon;
-     
+        double lat = 0;
+        double lon = 0;
+        float cTemp = 0;
+        float fTemp = 0;
+        float cTempHigh = 0;
+        float cTempLow = 0;
+        float fTempHigh = 0;
+        float fTempLow = 0;
+        float speedKph = 0;
+        float speedMph = 0;
+        //class object
+        Calculations myCalc = new Calculations();
+
         public MainPage()
         {
             //constructors
@@ -46,7 +57,7 @@ namespace Solstice
                 //test if location is found
                 if (location != null)
                 {
-                    //variables for gps
+                    //local variables for gps
                     lat = location.Latitude;
                     lon = location.Longitude;
 
@@ -69,15 +80,12 @@ namespace Solstice
                         var weatherType = localWeather["weather"][0]["description"];
                         var windSpeed = localWeather["wind"]["speed"];
                         var windDirection = localWeather["wind"]["deg"];
-
-                        //local variables
-                        float cTemp = 0;
-                        double speedKph;
-
-                        //tempreture from kelvin to celsius
-                        cTemp = ((float)kTemp - 273);
-                        //convert m/s into km/h
-                        speedKph = (float)windSpeed * 3.6;
+                                              
+                        //calculation methods                       
+                        cTemp = myCalc.toCelsius((float)kTemp);
+                        fTemp = myCalc.toFahrenheit((float)kTemp);
+                        speedKph = myCalc.toKilometers((float)windSpeed);
+                        speedMph = myCalc.toMiles((float)windSpeed);
 
                         //outputs Top Grid
                         tpLeft.Text = city.ToString();
@@ -88,7 +96,8 @@ namespace Solstice
                         btmRight.Text = weatherType.ToString();
 
                         //DEBUG
-                        //myOutput.Text = "DEBUG - Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C";                        
+                        //myOutput.Text = "DEBUG - Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C"; 
+                        
                     }// if responseCurrent
                     else
                     {
@@ -100,6 +109,9 @@ namespace Solstice
                     HttpClient forecast = new HttpClient();
                     var url2 = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
                     var responseForecast = await forecast.GetStringAsync(url2);
+
+                    //Debug
+                    //myOutput.Text = "DEBUG: "+ lat.ToString() + " " + lon.ToString();
 
                     //test if responseForecast is not empty
                     if (responseForecast != null)
@@ -116,8 +128,14 @@ namespace Solstice
                             var highTemp = localForecast["list"][i]["main"]["temp_max"];
                             var lowTemp = localForecast["list"][i]["main"]["temp_min"];
 
+                            //calculation methods                       
+                            cTempHigh = myCalc.toCelsius((float)highTemp);
+                            cTempLow = myCalc.toCelsius((float)lowTemp);
+                            fTempHigh = myCalc.toFahrenheit((float)highTemp);
+                            fTempLow = myCalc.toFahrenheit((float)lowTemp);
+
                             //top row
-                            if( (label = (Label)FindByName("top_" + (i + 1).ToString())) != null )
+                            if ( (label = (Label)FindByName("top_" + (i + 1).ToString())) != null )
                             {
                                 label.Text = theDescription.ToString();                               
                             }
@@ -125,13 +143,13 @@ namespace Solstice
                             //middle row
                             if ((label = (Label)FindByName("mid_" + (i + 1).ToString())) != null)
                             {
-                                label.Text = highTemp.ToString();
+                                label.Text = Math.Round(cTempHigh, 2).ToString() + "°C";
                             }
 
                             //bottom row
                             if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
-                            {                               
-                                label.Text = lowTemp.ToString();
+                            {
+                                label.Text = Math.Round(cTempLow, 2).ToString() + "°C";
                             }
 
                         }//for                       
@@ -141,8 +159,7 @@ namespace Solstice
                         //JSON empty
                         myOutput.Text = "ERROR - JSON CURRENT NULL";
                     }
-
-                }//if location is found
+                }//if GPS location is found
                 else
                 {
                     // GPS location not found
@@ -162,7 +179,7 @@ namespace Solstice
             catch (Exception ex)
             {
                 // Unable to get location
-                myOutput.Text = "ERROR - Unable to Get Location: " + ex.ToString();
+                myOutput.Text = "ERROR: " + ex.ToString();
             }
           
         }//getGPS
