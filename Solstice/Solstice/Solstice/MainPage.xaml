@@ -4,51 +4,51 @@
              xmlns:local="clr-namespace:Solstice"
              x:Class="Solstice.MainPage">
 
-    <StackLayout>
+    <StackLayout BackgroundColor="Blue">
 
         <Grid >
             <!-- Background Image -->
-            <Image x:Name="imageBackground" Aspect="Fill" />
-            <!-- Rest of the layout for the page. -->
-            <!-- Current weather grid 2x3 (Top)-->
+            <Image x:Name="imageBackground" Aspect="AspectFill" />
+            <!-- Rest of the layout for the page -->
+            <!-- Current weather grid 2x3 (Top) -->
             <StackLayout HorizontalOptions="CenterAndExpand"                        
                          VerticalOptions="Start"
-                         Padding="100,50,10,100">
+                         Padding="10,50,10,50">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="100" />
                         <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
-                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
-                    <Label x:Name="tpLeft" Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                    <Label x:Name="tpMid" Text="Top Middle" Grid.Row="0" Grid.Column="1" />
-                    <Label x:Name="tpRight" Text="Top Right" Grid.Row="0" Grid.Column="2" />
+                    <Label x:Name="tpLeft" Text="Top Left" Grid.Row="0" Grid.Column="0" FontSize="Medium" TextColor="White" />
+                    <Label x:Name="tpMid" Text="Top Middle" Grid.Row="0" Grid.Column="1" FontSize="Medium" TextColor="White" />
+                    <Label x:Name="tpRight" Text="Top Right" Grid.Row="0" Grid.Column="2" FontSize="Medium" TextColor="White" />
 
-                    <Label x:Name="btmLeft" Text="Bottom Left" Grid.Row="1" Grid.Column="0" />
-                    <Label x:Name="btmMid" Text="Bottom Middle" Grid.Row="1" Grid.Column="1" />
-                    <Label x:Name="btmRight" Text="Bottom Right" Grid.Row="1" Grid.Column="2" />
+                    <Label x:Name="btmLeft" Text="Bottom Left" Grid.Row="1" Grid.Column="0" FontSize="Medium" TextColor="White" />
+                    <Label x:Name="btmMid" Text="Bottom Middle" Grid.Row="1" Grid.Column="1" FontSize="Medium" TextColor="White" />
+                    <Label x:Name="btmRight" Text="Bottom Right" Grid.Row="1" Grid.Column="2" FontSize="Medium" TextColor="White" />
                 </Grid>
             </StackLayout>
 
             <!-- Placeholder GPS OUTPUTS -->
             <StackLayout HorizontalOptions="Center" 
-                        VerticalOptions="CenterAndExpand"
-                        Padding="10,10,10,10">
+                        VerticalOptions="Center"
+                        Padding="10,10,10,50">
                
-                <Label Text="DEBUG:"
+                <Label Text=""
                     x:Name="myOutput"
                     FontSize="Large" 
                     TextColor="Red" />
 
             </StackLayout>
 
-            <!-- 5 day weather grid 3 x 5 (Bottom)-->
-            <StackLayout HorizontalOptions="Center"
+            <!-- 5 day weather grid 3 x 5 (Bottom) -->
+            <StackLayout HorizontalOptions="CenterAndExpand"
                     VerticalOptions="End"
                     Padding="10,10,10,50">
                 <Grid>
@@ -58,30 +58,30 @@
                         <RowDefinition Height="75" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <!-- Placeholder Text -->
-                    <Label x:Name="top_1" Text="Top Left" Grid.Row="0" Grid.Column="0" />
-                    <Label x:Name="top_2" Text="Top Middle1" Grid.Row="0" Grid.Column="1" />
-                    <Label x:Name="top_3" Text="Top Middle2" Grid.Row="0" Grid.Column="2" />
-                    <Label x:Name="top_4" Text="Top Middle3" Grid.Row="0" Grid.Column="3" />
-                    <Label x:Name="top_5" Text="Top Right" Grid.Row="0" Grid.Column="4" />
+                    <Label x:Name="top_1" Text="Top Left" Grid.Row="0" Grid.Column="0" TextColor="White" />
+                    <Label x:Name="top_2" Text="Top Middle1" Grid.Row="0" Grid.Column="1" TextColor="White" />
+                    <Label x:Name="top_3" Text="Top Middle2" Grid.Row="0" Grid.Column="2" TextColor="White" />
+                    <Label x:Name="top_4" Text="Top Middle3" Grid.Row="0" Grid.Column="3" TextColor="White" />
+                    <Label x:Name="top_5" Text="Top Right" Grid.Row="0" Grid.Column="4" TextColor="White" />
 
-                    <Label x:Name="mid_1" Text="Mid Left" Grid.Row="1" Grid.Column="0" />
-                    <Label x:Name="mid_2" Text="Mid Middle1" Grid.Row="1" Grid.Column="1" />
-                    <Label x:Name="mid_3" Text="Mid Middle2" Grid.Row="1" Grid.Column="2" />
-                    <Label x:Name="mid_4" Text="Mid Middle3" Grid.Row="1" Grid.Column="3" />
-                    <Label x:Name="mid_5" Text="Mid Right" Grid.Row="1" Grid.Column="4" />
+                    <Label x:Name="mid_1" Text="Mid Left" Grid.Row="1" Grid.Column="0" TextColor="White" />
+                    <Label x:Name="mid_2" Text="Mid Middle1" Grid.Row="1" Grid.Column="1" TextColor="White" />
+                    <Label x:Name="mid_3" Text="Mid Middle2" Grid.Row="1" Grid.Column="2" TextColor="White" />
+                    <Label x:Name="mid_4" Text="Mid Middle3" Grid.Row="1" Grid.Column="3" TextColor="White" />
+                    <Label x:Name="mid_5" Text="Mid Right" Grid.Row="1" Grid.Column="4" TextColor="White" />
 
-                    <Label x:Name="btm_1" Text="Bot Left" Grid.Row="2" Grid.Column="0" />
-                    <Label x:Name="btm_2" Text="Bot Middle1" Grid.Row="2" Grid.Column="1" />
-                    <Label x:Name="btm_3" Text="Bot Middle2" Grid.Row="2" Grid.Column="2" />
-                    <Label x:Name="btm_4" Text="Bot Middle3" Grid.Row="2" Grid.Column="3" />
-                    <Label x:Name="btm_5" Text="Bot Right" Grid.Row="2" Grid.Column="4" />
+                    <Label x:Name="btm_1" Text="Bot Left" Grid.Row="2" Grid.Column="0" TextColor="White" />
+                    <Label x:Name="btm_2" Text="Bot Middle1" Grid.Row="2" Grid.Column="1" TextColor="White" />
+                    <Label x:Name="btm_3" Text="Bot Middle2" Grid.Row="2" Grid.Column="2" TextColor="White" />
+                    <Label x:Name="btm_4" Text="Bot Middle3" Grid.Row="2" Grid.Column="3" TextColor="White" />
+                    <Label x:Name="btm_5" Text="Bot Right" Grid.Row="2" Grid.Column="4" TextColor="White" />
 
                 </Grid>
             </StackLayout>

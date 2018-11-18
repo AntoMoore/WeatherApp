@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\mysunflower.png" />
+    <None Remove="Assets\Images\backgroundimg.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Images\mysunflower.png" />
+    <EmbeddedResource Include="Assets\Images\backgroundimg.png" />
   </ItemGroup>
 
   <ItemGroup>
