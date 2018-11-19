@@ -110,9 +110,6 @@ namespace Solstice
                     var url2 = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
                     var responseForecast = await forecast.GetStringAsync(url2);
 
-                    //Debug
-                    //myOutput.Text = "DEBUG: "+ lat.ToString() + " " + lon.ToString();
-
                     //test if responseForecast is not empty
                     if (responseForecast != null)
                     {
