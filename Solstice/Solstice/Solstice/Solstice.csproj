@@ -10,11 +10,56 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Images\backgroundimg.png" />
+    <None Remove="Assets\Images\backCold.png" />
+    <None Remove="Assets\Images\backColdRain.png" />
+    <None Remove="Assets\Images\backCool.png" />
+    <None Remove="Assets\Images\backCoolRain.png" />
+    <None Remove="Assets\Images\backHot.png" />
+    <None Remove="Assets\Images\backMild.png" />
+    <None Remove="Assets\Images\backSummer.png" />
+    <None Remove="Assets\Images\backVeryCold.png" />
+    <None Remove="Assets\Images\backWarm.png" />
+    <None Remove="Assets\Images\backWinter.png" />
+    <None Remove="Assets\Images\east.png" />
+    <None Remove="Assets\Images\iconClear.png" />
+    <None Remove="Assets\Images\iconCloud.png" />
+    <None Remove="Assets\Images\iconMixed.png" />
+    <None Remove="Assets\Images\iconRain.png" />
+    <None Remove="Assets\Images\neast.png" />
+    <None Remove="Assets\Images\north.png" />
+    <None Remove="Assets\Images\nwest.png" />
+    <None Remove="Assets\Images\safari.png" />
+    <None Remove="Assets\Images\seast.png" />
+    <None Remove="Assets\Images\south.png" />
+    <None Remove="Assets\Images\swest.png" />
+    <None Remove="Assets\Images\west.png" />
+    <None Remove="Assets\Images\whiteBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Images\backgroundimg.png" />
+    <EmbeddedResource Include="Assets\Images\backCold.png" />
+    <EmbeddedResource Include="Assets\Images\backCool.png" />
+    <EmbeddedResource Include="Assets\Images\backCoolRain.png" />
+    <EmbeddedResource Include="Assets\Images\backHot.png" />
+    <EmbeddedResource Include="Assets\Images\backMild.png" />
+    <EmbeddedResource Include="Assets\Images\backColdRain.png" />
+    <EmbeddedResource Include="Assets\Images\backSummer.png" />
+    <EmbeddedResource Include="Assets\Images\backVeryCold.png" />
+    <EmbeddedResource Include="Assets\Images\backWarm.png" />
+    <EmbeddedResource Include="Assets\Images\backWinter.png" />
+    <EmbeddedResource Include="Assets\Images\east.png" />
+    <EmbeddedResource Include="Assets\Images\iconClear.png" />
+    <EmbeddedResource Include="Assets\Images\iconCloud.png" />
+    <EmbeddedResource Include="Assets\Images\iconMixed.png" />
+    <EmbeddedResource Include="Assets\Images\iconRain.png" />
+    <EmbeddedResource Include="Assets\Images\neast.png" />
+    <EmbeddedResource Include="Assets\Images\north.png" />
+    <EmbeddedResource Include="Assets\Images\nwest.png" />
+    <EmbeddedResource Include="Assets\Images\seast.png" />
+    <EmbeddedResource Include="Assets\Images\south.png" />
+    <EmbeddedResource Include="Assets\Images\swest.png" />
+    <EmbeddedResource Include="Assets\Images\west.png" />
+    <EmbeddedResource Include="Assets\Images\whiteBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
