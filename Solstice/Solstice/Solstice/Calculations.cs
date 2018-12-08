@@ -40,14 +40,14 @@ namespace Solstice
         public float toKilometers(float input)
         {
             this.windSpeedMs = input;
-            windSpeedKmph = (float)(windSpeedMs * 3.6);
+            this.windSpeedKmph = (float)(windSpeedMs * 3.6);
             return windSpeedKmph;
         }
 
         public float toMiles(float input)
         {
             this.windSpeedMs = input;
-            windSpeedMph = (float)(windSpeedMs * 2.2369);
+            this.windSpeedMph = (float)(windSpeedMs * 2.2369);
             return windSpeedMph;
         }
     }
