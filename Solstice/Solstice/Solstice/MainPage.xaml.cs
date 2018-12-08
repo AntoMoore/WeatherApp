@@ -106,7 +106,7 @@ namespace Solstice
                         string strFilename1 = myImg.getIconUrl((string)weatherType);
                         tpMid.Source = ImageSource.FromResource(strFilename1, assembly);
 
-                        //ImageGenerator class method - COMPASS
+                        //ImageGenerator class method - WIND COMPASS
                         string strFilename2 = myImg.getCompassUrl((float)windDirection);
                         tpRight.Source = ImageSource.FromResource(strFilename2, assembly);
 

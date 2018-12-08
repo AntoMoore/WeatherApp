@@ -16,7 +16,7 @@
                   VerticalOptions="Start"
                   Margin="10,50,10,50">
 
-                <!-- Transparent white tile -->                
+                <!-- Transparent white tile *Need to make rounded -->                
                 <Image x:Name="transparentImage1" Opacity="0.2" Aspect="Fill" HeightRequest="100" WidthRequest="100"/>
                 
                 <!-- Current weather grid 2x3 (Top) -->
