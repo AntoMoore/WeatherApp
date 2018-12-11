@@ -9,12 +9,17 @@ using System.Net.Http;
 using Newtonsoft.Json.Linq;
 using Xamarin.Forms.StyleSheets;
 using System.Reflection;
+using System.IO;
 
 namespace Solstice
 {
     public partial class MainPage : ContentPage
     {
+        //constant
+        private const string OUTPUT_FILE = "MyWeatherData.txt";
+
         //Global variables
+        string firstURL, secondURL;
         double lat = 0;
         double lon = 0;
         float cTemp = 0;
@@ -25,11 +30,10 @@ namespace Solstice
         float speedMph = 0;
         string date;
         string day;
+        string citySearch = null;
         int epoch;
-        bool isSwitched = false;
-        int isMetric = 0;
-        int counter = 0;
-
+        int isMetric;       
+        
         //class objects
         Calculations myCalc = new Calculations();
         ImageGenerator myImg = new ImageGenerator();
@@ -39,10 +43,48 @@ namespace Solstice
         public MainPage()
         {            
             InitializeComponent();
+            LoadFile();
             SetupStyling();
-            GetWeather();            
+            GetWeather();           
         }
-       
+
+        //load settings from file
+        private void LoadFile()
+        {
+            // check if a file exists and try load it
+            try
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                // "MyWeatherData.txt"
+                string fileName = Path.Combine(path, OUTPUT_FILE);
+                //read file
+                string textInput = File.ReadAllText(fileName);
+                isMetric = Convert.ToInt32(textInput);
+
+                // 1 or 0 (1 = true, 0 = false)
+                if (isMetric == 1)
+                {
+                    //set button style blue
+                    toggleBtn.BackgroundColor = Color.FromRgb(0, 8, 255);
+                    toggleBtn.Text = "Metric";                   
+                }
+                else
+                {
+                    //set button style orange
+                    toggleBtn.BackgroundColor = Color.FromRgb(255, 165, 0);
+                    toggleBtn.Text = "Imperial";
+                }
+            }
+            catch
+            {
+                //set button style blue
+                toggleBtn.BackgroundColor = Color.FromRgb(0, 8, 255);
+                toggleBtn.Text = "Metric";
+                isMetric = 1;
+            }
+                       
+        }//loadFile
+
         //load embedded CSS
         private void SetupStyling()
         {
@@ -54,12 +96,14 @@ namespace Solstice
         //weather method
         public async void GetWeather()
         {
+            //reset error prompts
+            myOutput.Text = "";
+
             try
             {
                 //get geolocation
                 var request = new GeolocationRequest(GeolocationAccuracy.Medium);
                 var location = await Geolocation.GetLocationAsync(request);
-                counter++;
                                   
                 //test if location is found
                 if (location != null)
@@ -67,14 +111,22 @@ namespace Solstice
                     //local variables for gps
                     lat = location.Latitude;
                     lon = location.Longitude;
-
-                    //Debug
-                    //myOutput.Text = "DEBUG: "+ lat.ToString() + " " + lon.ToString();
-                  
-                    //JSON call to open weather api (Current Weather)
+                    
+                    // Http request
                     HttpClient current = new HttpClient();
-                    var url = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
-                    var responseCurrent = await current.GetStringAsync(url);              
+                    
+                    //check if Entry is empty
+                    if(String.IsNullOrEmpty(citySearch))
+                    {
+                        firstURL = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
+                    }
+                    else
+                    {
+                        firstURL = String.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
+                    }
+                
+                    //JSON call to open weather api (Current Weather)
+                    var responseCurrent = await current.GetStringAsync(firstURL);              
 
                     //test if responseCurrent is not empty
                     if(responseCurrent != null)
@@ -122,7 +174,7 @@ namespace Solstice
                         // Data outputs Top Grid
                         tpLeft.Text = city.ToString();
                         
-                        if(isSwitched == false)
+                        if(isMetric == 1)
                         {
                             //if in metric
                             btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
@@ -140,20 +192,28 @@ namespace Solstice
                                               
                         btmMid.Text = weatherType.ToString();
 
-                        //DEBUG
-                        //myOutput.Text = "DEBUG - Wind: " + Math.Round(speedKph, 2).ToString() + "Km/h " + city.ToString() + "\n " + weatherType.ToString() + " Temp: " + Math.Round(cTemp, 2).ToString() + "­°C"; 
-                        
                     }// if responseCurrent
                     else
                     {
                         //JSON empty
-                        myOutput.Text = "ERROR - JSON CURRENT NULL";
+                        myOutput.Text = "Unable to Find Weather";
+                    }
+
+                    // Http request
+                    HttpClient forecast = new HttpClient();
+
+                    //check if entry is empty
+                    if (String.IsNullOrEmpty(citySearch))
+                    {
+                        secondURL = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
+                    }
+                    else
+                    {
+                        secondURL = string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
                     }
 
                     //JSON call to open weather api (5 day Weather Forecast)
-                    HttpClient forecast = new HttpClient();
-                    var url2 = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
-                    var responseForecast = await forecast.GetStringAsync(url2);
+                    var responseForecast = await forecast.GetStringAsync(secondURL);
 
                     //test if responseForecast is not empty
                     if (responseForecast != null)
@@ -202,7 +262,7 @@ namespace Solstice
                             //bottom row
                             if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
                             {
-                                if (isSwitched == false)
+                                if (isMetric == 1)
                                 {
                                     //if in metric
                                     label.Text = Math.Round(cTempHigh, 1).ToString() + "°C";
@@ -214,12 +274,13 @@ namespace Solstice
                                 }
                             }
 
-                        }//for                       
+                        }//for 
+                       
                     }//if
                     else
                     {
                         //JSON empty
-                        myOutput.Text = "ERROR - JSON CURRENT NULL";
+                        myOutput.Text = "Unable to Find Weather";
                     }
                 }//if GPS location is found
                 else
@@ -228,48 +289,71 @@ namespace Solstice
                     myOutput.Text = "ERROR - GPS NULL";
                 }
             }
-            catch (FeatureNotSupportedException fnsEx)
+            catch (FeatureNotSupportedException)
             {
                 // Handle not supported on device exception
-                myOutput.Text = "ERROR - Not Supported on Device: " + fnsEx.ToString();
+                myOutput.Text = "Not Supported on Device: ";
             }
-            catch (PermissionException pEx)
+            catch (PermissionException)
             {
                 // Handle permission exception
-                myOutput.Text = "ERROR - Permission Exception: " + pEx.ToString();
+                myOutput.Text = "Permission Exception: ";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Unable to get location
-                myOutput.Text = "ERROR: " + ex.ToString();
+                myOutput.Text = "Unable to Find Location: " ;
             }
           
-        }//getGPS
+        }//getWeather
 
         //change metric/imperial when clicked
         private void toggleBtn_Clicked(object sender, EventArgs e)
         {
             //check if button has been pressed before
-            if (isSwitched == false)
+            if (isMetric == 1)
             {
                 //change output
                 toggleBtn.BackgroundColor = Color.FromRgb(255, 165, 0);
                 toggleBtn.Text = "Imperial";
-                isSwitched = true;
+                isMetric = 0;
             }
             else
             {
                 //change output
                 toggleBtn.BackgroundColor = Color.FromRgb(0, 8, 255);
                 toggleBtn.Text = "Metric";
-                isSwitched = false;
+                isMetric = 1;
             }
 
-            //reload weather
+            //save file
+            SaveFile();
+            //reload getWeather
             GetWeather();
 
+        }//toggleBtn
 
-        }
+        //save settings to file
+        private void SaveFile()
+        {         
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            // "MyWeatherData.txt"
+            string fileName = Path.Combine(path, OUTPUT_FILE);
+            // 1 or 0 (1 = true, 0 = false)
+            string outputString = isMetric.ToString();
+            //output to file
+            File.WriteAllText(fileName, outputString);
+
+        }//auto save
+
+        public void InputCity_Completed(object sender, EventArgs e)
+        {
+            //read input from search box
+            citySearch = inputCity.Text;
+            //reload getWeather
+            GetWeather();
+
+        }//inputCity
 
     }//mainpage
 }//namespace

@@ -32,8 +32,6 @@
                         Grid.Row="0"
                         Grid.Column="0"
                         TranslationX="-65"
-                        BackgroundColor="#0008ff"
-                        Text="Metric"
                         TextColor="White"
                         BorderColor="White"
                         BorderWidth="1"
@@ -46,7 +44,8 @@
                        Grid.Row="0"
                        Grid.Column="1"
                        TranslationX="65"
-                       Placeholder="Search"/>
+                       Placeholder="Search City"
+                       Completed="InputCity_Completed"/>
 
             </Grid>
             
