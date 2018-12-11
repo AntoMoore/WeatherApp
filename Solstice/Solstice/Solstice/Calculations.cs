@@ -33,7 +33,7 @@ namespace Solstice
         public float toFahrenheit(float input)
         {
             this.tempKelvin = input;
-            this.tempFahrenheit = (float)(tempKelvin * (9 / 5) - 459.67);
+            this.tempFahrenheit = (float)((tempKelvin * 9/5)  - 459.67);
             return tempFahrenheit;
         }
 

@@ -11,13 +11,52 @@
             <!-- Main Background Image -->
             <Image x:Name="imageBackground" Aspect="AspectFill" />
 
-            <!-- Rest of the layout for the page -->
+            <!-- Rest of the layout for the page goes below here-->
+            
+            <!-- button/text inputs top of page-->
+            <Grid HorizontalOptions="CenterAndExpand"
+                  VerticalOptions="Start"
+                  Margin="50,10,50,20">
+                
+                <!-- 1x2 grid at top-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="110" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Toggle metric/imperial -->
+                <Button x:Name="toggleBtn"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        TranslationX="-65"
+                        BackgroundColor="#0008ff"
+                        Text="Metric"
+                        TextColor="White"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        BorderRadius="10"
+                        Clicked="toggleBtn_Clicked"
+                        IsEnabled="True"/>
+                
+                <!-- Search by city-->
+                <Entry x:Name="inputCity"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       TranslationX="65"
+                       Placeholder="Search"/>
+
+            </Grid>
+            
+            <!-- Current weather -->
             <Grid HorizontalOptions="CenterAndExpand"                        
                   VerticalOptions="Start"
-                  Margin="10,50,10,50">
+                  Margin="10,70,10,50">
 
-                <!-- Transparent white tile *Need to make rounded -->                
-                <Image x:Name="transparentImage1" Opacity="0.2" Aspect="Fill" HeightRequest="100" WidthRequest="100"/>
+                <!-- Transparent white tile -->                
+                <Image x:Name="transparentImage1" Opacity="0.3" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
                 
                 <!-- Current weather grid 2x3 (Top) -->
                 <Grid HorizontalOptions="Center"                        
@@ -36,7 +75,7 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Grid Outputs -->
-                    <Label x:Name="tpLeft" Grid.Row="0" Grid.Column="0"  VerticalTextAlignment="Center"/>
+                    <Label x:Name="tpLeft" Grid.Row="0" Grid.Column="0"  VerticalTextAlignment="Center" />
                     <Image x:Name="tpMid" Grid.Row="0" Grid.Column="1" />
                     <Image x:Name="tpRight" Grid.Row="0" Grid.Column="2" />
 
@@ -58,12 +97,13 @@
 
             </StackLayout>
 
+            <!-- 5 day forecast -->
             <Grid HorizontalOptions="Center"
                   VerticalOptions="End"
                   Margin="10,10,10,50">
 
                 <!-- Transparent white tile -->
-                <Image x:Name="transparentImage2" Opacity="0.2" Aspect="Fill" HeightRequest="100" WidthRequest="100" />
+                <Image x:Name="transparentImage2" Opacity="0.3" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
                 
                 <!-- 5 day weather grid 3 x 5 (Bottom) -->
                 <Grid HorizontalOptions="CenterAndExpand"
@@ -72,8 +112,8 @@
 
                     <!-- Grid dimensions -->
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="64" />
                         <RowDefinition Height="50" />
+                        <RowDefinition Height="64" />
                         <RowDefinition Height="50" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
@@ -85,23 +125,23 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Grid Outputs -->
-                    <Image x:Name="top_1" Grid.Row="0" Grid.Column="0" />
-                    <Image x:Name="top_2" Grid.Row="0" Grid.Column="1" />
-                    <Image x:Name="top_3" Grid.Row="0" Grid.Column="2" />
-                    <Image x:Name="top_4" Grid.Row="0" Grid.Column="3" />
-                    <Image x:Name="top_5" Grid.Row="0" Grid.Column="4" />
+                    <Label x:Name="top_1" Grid.Row="0" Grid.Column="0" />
+                    <Label x:Name="top_9" Grid.Row="0" Grid.Column="1" />
+                    <Label x:Name="top_17" Grid.Row="0" Grid.Column="2" />
+                    <Label x:Name="top_25" Grid.Row="0" Grid.Column="3" />
+                    <Label x:Name="top_33" Grid.Row="0" Grid.Column="4" />
 
-                    <Label x:Name="mid_1" Grid.Row="1" Grid.Column="0" />
-                    <Label x:Name="mid_2" Grid.Row="1" Grid.Column="1" />
-                    <Label x:Name="mid_3" Grid.Row="1" Grid.Column="2" />
-                    <Label x:Name="mid_4" Grid.Row="1" Grid.Column="3" />
-                    <Label x:Name="mid_5" Grid.Row="1" Grid.Column="4" />
+                    <Image x:Name="mid_1" Grid.Row="1" Grid.Column="0" />
+                    <Image x:Name="mid_9" Grid.Row="1" Grid.Column="1" />
+                    <Image x:Name="mid_17" Grid.Row="1" Grid.Column="2" />
+                    <Image x:Name="mid_25" Grid.Row="1" Grid.Column="3" />
+                    <Image x:Name="mid_33" Grid.Row="1" Grid.Column="4" />
 
                     <Label x:Name="btm_1" Grid.Row="2" Grid.Column="0" />
-                    <Label x:Name="btm_2" Grid.Row="2" Grid.Column="1" />
-                    <Label x:Name="btm_3" Grid.Row="2" Grid.Column="2" />
-                    <Label x:Name="btm_4" Grid.Row="2" Grid.Column="3" />
-                    <Label x:Name="btm_5" Grid.Row="2" Grid.Column="4" />
+                    <Label x:Name="btm_9" Grid.Row="2" Grid.Column="1" />
+                    <Label x:Name="btm_17" Grid.Row="2" Grid.Column="2" />
+                    <Label x:Name="btm_25" Grid.Row="2" Grid.Column="3" />
+                    <Label x:Name="btm_33" Grid.Row="2" Grid.Column="4" />
 
                 </Grid>
             </Grid>

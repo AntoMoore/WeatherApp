@@ -32,8 +32,8 @@
     <None Remove="Assets\Images\seast.png" />
     <None Remove="Assets\Images\south.png" />
     <None Remove="Assets\Images\swest.png" />
+    <None Remove="Assets\Images\tileWhite.png" />
     <None Remove="Assets\Images\west.png" />
-    <None Remove="Assets\Images\whiteBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -58,8 +58,8 @@
     <EmbeddedResource Include="Assets\Images\seast.png" />
     <EmbeddedResource Include="Assets\Images\south.png" />
     <EmbeddedResource Include="Assets\Images\swest.png" />
+    <EmbeddedResource Include="Assets\Images\tileWhite.png" />
     <EmbeddedResource Include="Assets\Images\west.png" />
-    <EmbeddedResource Include="Assets\Images\whiteBackground.png" />
   </ItemGroup>
 
   <ItemGroup>
