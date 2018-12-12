@@ -39,7 +39,7 @@
                         Clicked="toggleBtn_Clicked"
                         IsEnabled="True"/>
                 
-                <!-- Search by city (activates on keyboard "ENTER" pressed -->
+                <!-- Search by city activates on keyboard "ENTER" pressed -->
                 <Entry x:Name="inputCity"
                        Grid.Row="0"
                        Grid.Column="1"
