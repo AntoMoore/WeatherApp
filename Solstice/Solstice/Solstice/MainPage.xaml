@@ -39,12 +39,12 @@
                         Clicked="toggleBtn_Clicked"
                         IsEnabled="True"/>
                 
-                <!-- Search by city-->
+                <!-- Search by city (activates on keyboard "ENTER" pressed -->
                 <Entry x:Name="inputCity"
                        Grid.Row="0"
                        Grid.Column="1"
                        TranslationX="65"
-                       Placeholder="Search City"
+                       Placeholder="Search City"                      
                        Completed="InputCity_Completed"/>
 
             </Grid>

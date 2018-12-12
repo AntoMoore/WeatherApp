@@ -91,7 +91,8 @@ namespace Solstice
             this.Resources.Add(StyleSheet.FromAssemblyResource(
             IntrospectionExtensions.GetTypeInfo(typeof(MainPage)).Assembly,
             "Solstice.Assets.style.css"));
-        }
+
+        }//setupStyling
 
         //weather method
         public async void GetWeather()
@@ -110,21 +111,23 @@ namespace Solstice
                 {
                     //local variables for gps
                     lat = location.Latitude;
-                    lon = location.Longitude;
+                    lon = location.Longitude;                   
                     
-                    // Http request
-                    HttpClient current = new HttpClient();
-                    
-                    //check if Entry is empty
+                    //check if text entry is empty or not
                     if(String.IsNullOrEmpty(citySearch))
                     {
+                        //use gps
                         firstURL = String.Format("http://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
                     }
                     else
                     {
+                        //use city name
                         firstURL = String.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
                     }
-                
+
+                    // Http request
+                    HttpClient current = new HttpClient();
+
                     //JSON call to open weather api (Current Weather)
                     var responseCurrent = await current.GetStringAsync(firstURL);              
 
@@ -198,19 +201,21 @@ namespace Solstice
                         //JSON empty
                         myOutput.Text = "Unable to Find Weather";
                     }
-
-                    // Http request
-                    HttpClient forecast = new HttpClient();
-
-                    //check if entry is empty
+                    
+                    //check if entry is blank
                     if (String.IsNullOrEmpty(citySearch))
                     {
+                        //use gps
                         secondURL = string.Format("http://api.openweathermap.org/data/2.5/forecast?lat={0}&lon={1}&appid=c16bcf9b4251e961d8106438b0711041", lat, lon);
                     }
                     else
                     {
+                        //use city name
                         secondURL = string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
                     }
+
+                    // Http request
+                    HttpClient forecast = new HttpClient();
 
                     //JSON call to open weather api (5 day Weather Forecast)
                     var responseForecast = await forecast.GetStringAsync(secondURL);
@@ -225,7 +230,7 @@ namespace Solstice
                         Label label;
                         Image image;
 
-                        //make loop for 5 day forecast - NB: loop in increments of 8 because data is every 3 hours (3 * 8 = 24)
+                        //make loop for 5 day forecast - NB: loop in increments of 8 because data is every 3 hours (3 * 8 = 24hrs)
                         for(int i = 0; i < 40; i += 8)
                         {
                             //variables created from the api data
@@ -234,7 +239,7 @@ namespace Solstice
                             var highTemp = localForecast["list"][i]["main"]["temp_max"];
                             var lowTemp = localForecast["list"][i]["main"]["temp_min"];
 
-                            //find day of the week
+                            //FindDate class methods
                             epoch = (int)unixTime;
                             date = myUnix.unixToString(epoch);
                             day = myUnix.dateToDay(date);
@@ -247,19 +252,19 @@ namespace Solstice
                             string strFilename = myImg.getIconUrl((string)theDescription);
                             var assembly = typeof(MainPage);
                            
-                            //top row
+                            //top row - Day
                             if ((label = (Label)FindByName("top_" + (i + 1).ToString())) != null)
                             {
                                 label.Text = day.ToString();
                             }
 
-                            //mid row
+                            //mid row - Icon
                             if ((image = (Image)FindByName("mid_" + (i + 1).ToString())) != null)
                             {
                                 image.Source = ImageSource.FromResource(strFilename, assembly);
                             }
 
-                            //bottom row
+                            //bottom row - Temperature
                             if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
                             {
                                 if (isMetric == 1)
@@ -297,7 +302,7 @@ namespace Solstice
             catch (PermissionException)
             {
                 // Handle permission exception
-                myOutput.Text = "Permission Exception: ";
+                myOutput.Text = "Enable Permission Access: ";
             }
             catch (Exception)
             {
@@ -316,6 +321,7 @@ namespace Solstice
                 //change output
                 toggleBtn.BackgroundColor = Color.FromRgb(255, 165, 0);
                 toggleBtn.Text = "Imperial";
+                //change value
                 isMetric = 0;
             }
             else
@@ -323,10 +329,11 @@ namespace Solstice
                 //change output
                 toggleBtn.BackgroundColor = Color.FromRgb(0, 8, 255);
                 toggleBtn.Text = "Metric";
+                //change value
                 isMetric = 1;
             }
 
-            //save file
+            //savefile method
             SaveFile();
             //reload getWeather
             GetWeather();
@@ -344,8 +351,9 @@ namespace Solstice
             //output to file
             File.WriteAllText(fileName, outputString);
 
-        }//auto save
+        }//saveFile
 
+        // when "Search City" has pressed ENTER
         public void InputCity_Completed(object sender, EventArgs e)
         {
             //read input from search box
