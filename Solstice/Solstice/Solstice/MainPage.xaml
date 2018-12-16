@@ -44,7 +44,7 @@
                        Grid.Row="0"
                        Grid.Column="1"
                        TranslationX="65"
-                       Placeholder="Search City"                      
+                       Placeholder="Search"                      
                        Completed="InputCity_Completed"/>
 
             </Grid>
