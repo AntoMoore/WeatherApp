@@ -14,43 +14,51 @@
             <!-- Rest of the layout for the page goes below here-->
             
             <!-- button/text inputs top of page-->
-            <Grid HorizontalOptions="CenterAndExpand"
+            <Grid HorizontalOptions="Center"
                   VerticalOptions="Start"
-                  Margin="50,10,50,20">
-                
-                <!-- 1x2 grid at top-->
+                  Margin="5,10,5,20"
+                  Padding="10">
+
+                <!-- 1x3 grid at top-->
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="40" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110" />
-                    <ColumnDefinition Width="110" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="150" />
+                    <ColumnDefinition Width="100" />
                 </Grid.ColumnDefinitions>
                 
                 <!-- Toggle metric/imperial -->
                 <Button x:Name="toggleBtn"
                         Grid.Row="0"
                         Grid.Column="0"
-                        TranslationX="-65"
+                        HorizontalOptions="End"
+                        WidthRequest="90"
                         TextColor="White"
                         BorderColor="White"
                         BorderWidth="1"
                         BorderRadius="10"
+                        Opacity="0.8"
                         Clicked="toggleBtn_Clicked"
                         IsEnabled="True"/>
                 
+                <!-- Empty column to fill spot behind the Navigation menu (UWP)-->
+                <Label Grid.Row="0" Grid.Column="1" />
+
                 <!-- Search by city activates on keyboard "ENTER" pressed -->
                 <Entry x:Name="inputCity"
                        Grid.Row="0"
-                       Grid.Column="1"
-                       TranslationX="65"
+                       Grid.Column="2"
+                       HorizontalOptions="Start"
+                       WidthRequest="90"
                        Placeholder="Search"                      
                        Completed="InputCity_Completed"/>
 
             </Grid>
             
             <!-- Current weather -->
-            <Grid HorizontalOptions="CenterAndExpand"                        
+            <Grid HorizontalOptions="Center"                        
                   VerticalOptions="Start"
                   Margin="10,70,10,50">
 
