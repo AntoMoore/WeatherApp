@@ -30,19 +30,31 @@ namespace Solstice
             //assign icon url
             if (this.weather == "Clear")
             {
-                iconUrl = "Solstice.Assets.Images.iconClear.png";
+                iconUrl = "Solstice.Assets.Images.iconClear2.png";
             }
             else if (this.weather == "Clouds")
             {
-                iconUrl = "Solstice.Assets.Images.iconCloud.png";
+                iconUrl = "Solstice.Assets.Images.iconCloud2.png";
             }
-            else if (this.weather == "Rain")
+            else if (this.weather == "Rain" || this.weather == "Drizzle")
             {
-                iconUrl = "Solstice.Assets.Images.iconRain.png";
+                iconUrl = "Solstice.Assets.Images.iconRain2.png";
+            }
+            else if (this.weather == "Fog")
+            {
+                iconUrl = "Solstice.Assets.Images.iconFog2.png";
+            }
+            else if (this.weather == "Snow")
+            {
+                iconUrl = "Solstice.Assets.Images.iconSnow2.png";
+            }
+            else if (this.weather == "Thunderstorm")
+            {
+                iconUrl = "Solstice.Assets.Images.iconThunder2.png";
             }
             else
             {
-                iconUrl = "Solstice.Assets.Images.iconMixed.png";
+                iconUrl = "Solstice.Assets.Images.iconClouds2.png";
             }
             return iconUrl;
         }
