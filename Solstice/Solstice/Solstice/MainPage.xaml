@@ -63,7 +63,7 @@
                   Margin="10,70,10,50">
 
                 <!-- Transparent white tile -->                
-                <Image x:Name="transparentImage1" Opacity="0.3" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
+                <Image x:Name="transparentImage1" Opacity="0.4" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
                 
                 <!-- Current weather grid 2x3 (Top) -->
                 <Grid HorizontalOptions="Center"                        
@@ -82,13 +82,45 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Grid Outputs -->
-                    <Label x:Name="tpLeft" Grid.Row="0" Grid.Column="0"  VerticalTextAlignment="Center" />
+                    <Label x:Name="tpLeft" Grid.Row="0" Grid.Column="0"  VerticalTextAlignment="Center" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+                    
                     <Image x:Name="tpMid" Grid.Row="0" Grid.Column="1" />
                     <Image x:Name="tpRight" Grid.Row="0" Grid.Column="2" />
 
-                    <Label x:Name="btmLeft" Grid.Row="1" Grid.Column="0" />
-                    <Label x:Name="btmMid" Grid.Row="1" Grid.Column="1" />
-                    <Label x:Name="btmRight" Grid.Row="1" Grid.Column="2" />
+                    <Label x:Name="btmLeft" Grid.Row="1" Grid.Column="0" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                        
+                    </Label>
+
+                    <Label x:Name="btmMid" Grid.Row="1" Grid.Column="1" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="btmRight" Grid.Row="1" Grid.Column="2" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
                 </Grid>
             </Grid>
 
@@ -110,7 +142,7 @@
                   Margin="10,10,10,50">
 
                 <!-- Transparent white tile -->
-                <Image x:Name="transparentImage2" Opacity="0.3" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
+                <Image x:Name="transparentImage2" Opacity="0.4" Aspect="Fill" HeightRequest="10" WidthRequest="10" />
                 
                 <!-- 5 day weather grid 3 x 5 (Bottom) -->
                 <Grid HorizontalOptions="CenterAndExpand"
@@ -132,11 +164,50 @@
                     </Grid.ColumnDefinitions>
 
                     <!-- Grid Outputs -->
-                    <Label x:Name="top_1" Grid.Row="0" Grid.Column="0" />
-                    <Label x:Name="top_9" Grid.Row="0" Grid.Column="1" />
-                    <Label x:Name="top_17" Grid.Row="0" Grid.Column="2" />
-                    <Label x:Name="top_25" Grid.Row="0" Grid.Column="3" />
-                    <Label x:Name="top_33" Grid.Row="0" Grid.Column="4" />
+                    <Label x:Name="top_1" Grid.Row="0" Grid.Column="0" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="top_9" Grid.Row="0" Grid.Column="1" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="top_17" Grid.Row="0" Grid.Column="2" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="top_25" Grid.Row="0" Grid.Column="3" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="top_33" Grid.Row="0" Grid.Column="4" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
 
                     <Image x:Name="mid_1" Grid.Row="1" Grid.Column="0" />
                     <Image x:Name="mid_9" Grid.Row="1" Grid.Column="1" />
@@ -144,11 +215,50 @@
                     <Image x:Name="mid_25" Grid.Row="1" Grid.Column="3" />
                     <Image x:Name="mid_33" Grid.Row="1" Grid.Column="4" />
 
-                    <Label x:Name="btm_1" Grid.Row="2" Grid.Column="0" />
-                    <Label x:Name="btm_9" Grid.Row="2" Grid.Column="1" />
-                    <Label x:Name="btm_17" Grid.Row="2" Grid.Column="2" />
-                    <Label x:Name="btm_25" Grid.Row="2" Grid.Column="3" />
-                    <Label x:Name="btm_33" Grid.Row="2" Grid.Column="4" />
+                    <Label x:Name="btm_1" Grid.Row="2" Grid.Column="0" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="btm_9" Grid.Row="2" Grid.Column="1" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="btm_17" Grid.Row="2" Grid.Column="2" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="btm_25" Grid.Row="2" Grid.Column="3" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
+
+                    <Label x:Name="btm_33" Grid.Row="2" Grid.Column="4" >
+                        <Label.FontFamily>
+                            <OnPlatform x:TypeArguments="x:String">
+                                <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
+                                <On Platform="UWP" Value="Assets/Fonts/PermanentMarker-Regular.ttf#Permanent Marker" />
+                            </OnPlatform>
+                        </Label.FontFamily>
+                    </Label>
 
                 </Grid>
             </Grid>
