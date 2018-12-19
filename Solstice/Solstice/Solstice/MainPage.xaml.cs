@@ -22,6 +22,7 @@ namespace Solstice
         string firstURL, secondURL;
         double lat = 0;
         double lon = 0;
+        float[] kTempArr = new float[40];
         float cTemp = 0;
         float fTemp = 0;
         float cTempHigh = 0;
@@ -121,7 +122,7 @@ namespace Solstice
                     }
                     else
                     {
-                        //use city name
+                        //use search term
                         firstURL = String.Format("http://api.openweathermap.org/data/2.5/weather?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
                     }
 
@@ -179,8 +180,7 @@ namespace Solstice
                         
                         if(isMetric == 1)
                         {
-                            //if in metric
-                            btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
+                            //if in metric                           
                             btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
                             btmRight.Text = Math.Round(speedKph, 0).ToString() + " Km/h";
 
@@ -188,7 +188,6 @@ namespace Solstice
                         else
                         {
                             //if in imperial
-                            btmLeft.Text = Math.Round(fTemp, 1).ToString() + "°F";
                             btmLeft.Text = Math.Round(fTemp, 1).ToString() + "°F";
                             btmRight.Text = Math.Round(speedMph, 0).ToString() + " Mp/h";
                         }
@@ -210,7 +209,7 @@ namespace Solstice
                     }
                     else
                     {
-                        //use city name
+                        //use search term
                         secondURL = string.Format("http://api.openweathermap.org/data/2.5/forecast?q={0}&appid=c16bcf9b4251e961d8106438b0711041", citySearch);
                     }
 
@@ -236,8 +235,7 @@ namespace Solstice
                             //variables created from the api data
                             var unixTime = localForecast["list"][i]["dt"];
                             var theDescription = localForecast["list"][i]["weather"][0]["main"];
-                            var highTemp = localForecast["list"][i]["main"]["temp_max"];
-                            var lowTemp = localForecast["list"][i]["main"]["temp_min"];
+                            kTempArr[i] = (float)localForecast["list"][i]["main"]["temp_max"];
 
                             //FindDate class methods
                             epoch = (int)unixTime;
@@ -245,8 +243,8 @@ namespace Solstice
                             day = myUnix.dateToDay(date);
 
                             //calculation class methods                       
-                            cTempHigh = myCalc.toCelsius((float)highTemp);                            
-                            fTempHigh = myCalc.toFahrenheit((float)highTemp);                            
+                            cTempHigh = myCalc.toCelsius(kTempArr[i]);                            
+                            fTempHigh = myCalc.toFahrenheit(kTempArr[i]);                            
 
                             //ImageGenerator class method - ICONS (forecast)
                             string strFilename = myImg.getIconUrl((string)theDescription);
@@ -318,26 +316,66 @@ namespace Solstice
             //check if button has been pressed before
             if (isMetric == 1)
             {
-                //change output
+                //change button
                 toggleBtn.BackgroundColor = Color.FromRgb(255, 165, 0);
                 toggleBtn.Text = "Imperial";
+
+                //change temp/wind speed
+                btmLeft.Text = Math.Round(fTemp, 1).ToString() + "°F";
+                btmRight.Text = Math.Round(speedMph, 0).ToString() + " Mp/h";
+
+                //change 5 day forecast
+                for (int i = 0; i < 40; i += 8)
+                {
+                    //label object
+                    Label label;
+
+                    //calculation class methods                       
+                    fTempHigh = myCalc.toFahrenheit(kTempArr[i]);
+
+                    //bottom row - Temperature
+                    if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
+                    {
+                        label.Text = Math.Round(fTempHigh, 1).ToString() + "°F";
+                    }
+                }
+
                 //change value
                 isMetric = 0;
             }
             else
             {
-                //change output
+                //change button
                 toggleBtn.BackgroundColor = Color.FromRgb(0, 8, 255);
                 toggleBtn.Text = "Metric";
+
+                //change current temp/windspeed
+                btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
+                btmRight.Text = Math.Round(speedKph, 0).ToString() + " Km/h";
+
+                //change 5 day forecast
+                for (int i = 0; i < 40; i += 8)
+                {
+                    //label object
+                    Label label;
+
+                    //calculation class methods                       
+                    cTempHigh = myCalc.toCelsius(kTempArr[i]);
+
+                    //bottom row - Temperature
+                    if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
+                    {
+                        label.Text = Math.Round(cTempHigh, 1).ToString() + "°C";
+                    }
+                }
+
                 //change value
                 isMetric = 1;
             }
 
-            //savefile method
+            //call savefile method
             SaveFile();
-            //reload getWeather
-            GetWeather();
-
+           
         }//toggleBtn
 
         //save settings to file
