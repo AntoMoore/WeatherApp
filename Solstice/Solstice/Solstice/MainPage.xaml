@@ -68,16 +68,16 @@
                 <!-- Current weather grid 2x3 (Top) -->
                 <Grid HorizontalOptions="Center"                        
                       VerticalOptions="Start"
-                      Padding="10">
+                      Padding="15">
 
                     <!-- Grid dimensions -->
                     <Grid.RowDefinitions>
                         <RowDefinition Height="64" />
-                        <RowDefinition Height="50" />
+                        <RowDefinition Height="64" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="120" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
@@ -92,11 +92,11 @@
                     </Label>
                     
                     <!-- Weather icon/wind compass -->
-                    <Image x:Name="tpMid" Grid.Row="0" Grid.Column="1" />
+                    <Image x:Name="tpMid" Grid.Row="0" Grid.Column="1" MinimumHeightRequest="64" MinimumWidthRequest="64"/>
                     <Image x:Name="tpRight" Grid.Row="0" Grid.Column="2" />
 
                     <!-- Grid Outputs -->
-                    <Label x:Name="btmLeft" Grid.Row="1" Grid.Column="0" >
+                    <Label x:Name="btmLeft" Grid.Row="1" Grid.Column="0" VerticalTextAlignment="Center" >
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
@@ -106,7 +106,7 @@
                         
                     </Label>
 
-                    <Label x:Name="btmMid" Grid.Row="1" Grid.Column="1" >
+                    <Label x:Name="btmMid" Grid.Row="1" Grid.Column="1" VerticalTextAlignment="Center" >
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
@@ -115,7 +115,7 @@
                         </Label.FontFamily>
                     </Label>
 
-                    <Label x:Name="btmRight" Grid.Row="1" Grid.Column="2" >
+                    <Label x:Name="btmRight" Grid.Row="1" Grid.Column="2" VerticalTextAlignment="Center" >
                         <Label.FontFamily>
                             <OnPlatform x:TypeArguments="x:String">
                                 <On Platform="Android" Value="PermanentMarker-Regular.ttf#Permanent Marker Regular" />
@@ -149,7 +149,7 @@
                 <!-- 5 day weather grid 3 x 5 (Bottom) -->
                 <Grid HorizontalOptions="CenterAndExpand"
                       VerticalOptions="End"
-                      Padding="10">
+                      Padding="15">
 
                     <!-- Grid dimensions -->
                     <Grid.RowDefinitions>

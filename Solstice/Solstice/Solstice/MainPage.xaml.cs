@@ -181,14 +181,14 @@ namespace Solstice
                         if(isMetric == 1)
                         {
                             //if in metric                           
-                            btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
+                            btmLeft.Text = Math.Round(cTemp, 2).ToString() + "°C";
                             btmRight.Text = Math.Round(speedKph, 0).ToString() + " Km/h";
 
                         }
                         else
                         {
                             //if in imperial
-                            btmLeft.Text = Math.Round(fTemp, 1).ToString() + "°F";
+                            btmLeft.Text = Math.Round(fTemp, 2).ToString() + "°F";
                             btmRight.Text = Math.Round(speedMph, 0).ToString() + " Mp/h";
                         }
                                               
@@ -268,12 +268,12 @@ namespace Solstice
                                 if (isMetric == 1)
                                 {
                                     //if in metric
-                                    label.Text = Math.Round(cTempHigh, 1).ToString() + "°C";
+                                    label.Text = Math.Round(cTempHigh, 2).ToString() + "°C";
                                 }
                                 else
                                 {
                                     //if in imperial
-                                    label.Text = Math.Round(fTempHigh, 1).ToString() + "°F";
+                                    label.Text = Math.Round(fTempHigh, 2).ToString() + "°F";
                                 }
                             }
 
@@ -321,7 +321,7 @@ namespace Solstice
                 toggleBtn.Text = "Imperial";
 
                 //change temp/wind speed
-                btmLeft.Text = Math.Round(fTemp, 1).ToString() + "°F";
+                btmLeft.Text = Math.Round(fTemp, 2).ToString() + "°F";
                 btmRight.Text = Math.Round(speedMph, 0).ToString() + " Mp/h";
 
                 //change 5 day forecast
@@ -336,7 +336,7 @@ namespace Solstice
                     //bottom row - Temperature
                     if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
                     {
-                        label.Text = Math.Round(fTempHigh, 1).ToString() + "°F";
+                        label.Text = Math.Round(fTempHigh, 2).ToString() + "°F";
                     }
                 }
 
@@ -350,7 +350,7 @@ namespace Solstice
                 toggleBtn.Text = "Metric";
 
                 //change current temp/windspeed
-                btmLeft.Text = Math.Round(cTemp, 1).ToString() + "°C";
+                btmLeft.Text = Math.Round(cTemp, 2).ToString() + "°C";
                 btmRight.Text = Math.Round(speedKph, 0).ToString() + " Km/h";
 
                 //change 5 day forecast
@@ -365,7 +365,7 @@ namespace Solstice
                     //bottom row - Temperature
                     if ((label = (Label)FindByName("btm_" + (i + 1).ToString())) != null)
                     {
-                        label.Text = Math.Round(cTempHigh, 1).ToString() + "°C";
+                        label.Text = Math.Round(cTempHigh, 2).ToString() + "°C";
                     }
                 }
 
